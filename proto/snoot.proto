@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package snoot;
+
+service SnootService {
+  rpc Boop(Snoot) returns (Condition);
+  /* rpc Photo(Snoot) returns (stream Image); */
+}
+
+message Snoot {
+  string name = 1;
+}
+
+message Condition {
+  Snoot snoot = 1;
+
+  // Number of times the snoot has been booped.
+  int32 booped = 2;
+}
+
+/* message Image { */
+/*   bytes chunk = 1; */
+/* } */
+
