@@ -1,5 +1,11 @@
+use std::env;
+use std::path::PathBuf;
+
 fn main() {
-    tonic_build::compile_protos("proto/snoot.proto")
-        .unwrap_or_else(|e| panic!("Failed to compile protos {:?}", e));
+    let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
+    tonic_build::configure()
+        .file_descriptor_set_path(out_dir.join("snoot_descriptor.bin"))
+        .compile(&["proto/snoot.proto"], &["proto"])
+        .unwrap();
 }
 
